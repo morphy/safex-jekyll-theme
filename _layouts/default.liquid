@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="pl">
+  {% include head.liquid %}
+
+  <body>
+    {% include header/index.liquid %}
+
+    <main>
+      {% unless page.layout == 'home' %}
+        {% include page-header.liquid %}
+      {% endunless %}
+
+      {{ content }}
+    </main>
+
+    {% include footer/index.liquid %}
+  </body>
+</html>

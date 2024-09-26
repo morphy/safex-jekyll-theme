@@ -1,0 +1,14 @@
+<footer
+  class="bg-gray-750 bg-no-repeat bg-center sm:mt-14"
+  style="background-image: url('{{ "assets/images/footer-bg.png" | relative_url }}')"
+>
+  {% include footer/cta.liquid %}
+
+  <div class="container py-16">
+    {% include footer/main.liquid %}
+
+    {% include footer/contact.liquid %}
+  </div>
+
+  {% include footer/footnote.liquid %}
+</footer>

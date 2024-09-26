@@ -1,0 +1,101 @@
+---
+layout: default
+---
+
+<section class="container grid grid-cols-12 gap-10 pt-16 pb-24">
+  <div class="col-span-12 md:col-span-6 lg:col-span-7 xl:col-span-8">
+    <div class="text-center mb-12">
+      <div class="heading">
+        <h1>{{ page.subtitle }}</h1>
+        <hr>
+      </div>
+    </div>
+
+    <div class="content">{{ content }}</div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 lg:col-span-5 xl:col-span-4 flex flex-col gap-3">
+    <div class="bg-red-500 p-1">
+      <div class="border-1 border-white border-solid p-5 lg:p-7 flex items-center gap-4">
+        <div
+          class="flex-none w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center rounded-full border-2 border-solid border-white *:fill-white *:w-5 *:lg:w-6"
+        >
+          {% include icons/location.svg %}
+        </div>
+
+        <div>
+          <h3 class="text-white font-semibold uppercase tracking-wider">Gdzie jesteśmy?</h3>
+
+          <p class="mb-0 mt-1 text-white">
+            <a
+              class="text-white"
+              target="_blank"
+              href="{{ site.addressHref }}"
+            >
+              {{- site.address -}}
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-red-500 p-1">
+      <div class="border-1 border-white border-solid p-5 lg:p-7 flex items-center gap-4">
+        <div
+          class="flex-none w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center rounded-full border-2 border-solid border-white *:fill-white *:w-5 *:lg:w-6"
+        >
+          {% include icons/phone.svg %}
+        </div>
+
+        <div>
+          <h3 class="text-white font-semibold uppercase tracking-wider">Zadzwoń do nas</h3>
+
+          <p class="mb-0 mt-1 text-white">
+            {% for phone in site.phones %}
+              {{ phone.title }}:
+              <a
+                class="text-white"
+                href="{{ phone.number | remove: ' ' | prepend: 'tel:' }}"
+              >
+                {{ phone.number }}
+              </a>
+
+              {% if forloop.index != forloop.length %}
+                <br>
+              {% endif %}
+            {% endfor %}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-red-500 p-1">
+      <div class="border-1 border-white border-solid p-5 lg:p-7 flex items-center gap-4">
+        <div
+          class="flex-none w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center rounded-full border-2 border-solid border-white *:fill-white *:w-5 *:lg:w-6"
+        >
+          {% include icons/mail.svg %}
+        </div>
+
+        <div>
+          <h3 class="text-white font-semibold uppercase tracking-wider">Wyślij wiadomość</h3>
+
+          <p class="mb-0 mt-1 text-white">
+            {% for email in site.emails %}
+              <a
+                class="text-white"
+                href="{{ email | prepend: 'mailto:' }}"
+              >
+                {{ email }}
+              </a>
+
+              {% if forloop.index != forloop.length %}
+                <br>
+              {% endif %}
+            {% endfor %}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

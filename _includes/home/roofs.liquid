@@ -1,0 +1,38 @@
+<section class="pt-16 pb-24 bg-neutral-100">
+  <div class="container text-center mb-12">
+    <div class="heading mb-12">
+      <h1>{{ page.roofsTitle }}</h1>
+      <hr>
+    </div>
+
+    <p class="lg:w-4/5 mx-auto">
+      {{ page.roofsDesc | markdownify | remove: '<p>' | remove: '</p>' }}
+    </p>
+  </div>
+
+  <div class="flex flex-wrap bg-white">
+    {% assign services = site.services | where_exp: 'service', 'service.url contains page.roofsCategory' %}
+
+    {% for service in services limit: 6 %}
+      <div class="basis-full sm:basis-1/2 md:basis-2/6 xxl:basis-1/6 flex flex-col">
+        {% assign image = service.url | append: '/' | append: service.slug | append: '-1-400x450' %}
+
+        <a href="{{ service.url | relative_url }}">
+          {% include image.liquid src=image class='w-full h-80 object-cover' loading='lazy' %}
+        </a>
+
+        <div class="flex-1 flex items-center justify-center p-6 border-gray-200 border-solid border-b-1 border-r-1">
+          <a href="{{ service.url | relative_url }}">
+            <h5 class="text-center text-xs text-black hover:text-red-500 duration-200">{{ service.title }}</h5>
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="container text-center mt-16">
+    <div class="button">
+      <a href="{{ page.roofsHref | relative_url }}">{{ page.roofsLink }}</a>
+    </div>
+  </div>
+</section>

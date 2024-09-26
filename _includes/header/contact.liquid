@@ -1,0 +1,44 @@
+<div class="container flex items-center justify-between gap-6 py-8 flex-col lg:flex-row">
+  <a href="{{ site.baseurl }}" rel="home" class="block">
+    <img
+      src="{{ site.logo | relative_url }}"
+      alt="Safex"
+      class="w-[150px]"
+    >
+  </a>
+
+  <div class="w-full flex items-start justify-between gap-4 flex-col lg:w-auto sm:items-center sm:gap-6 sm:flex-row">
+    <div class="flex items-center gap-3">
+      <div class="p-[14px] w-12 border-1 border-red-500 border-solid *:fill-red-500">
+        {% include icons/phone.svg %}
+      </div>
+
+      <div class="text-2xs">
+        <h6 class="mb-1 text-zinc-500">Telefon</h6>
+        <p class="text-zinc-700 m-0">{{ site.phones.first.number }}</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <div class="p-[15px] w-12 border-1 border-red-500 border-solid *:fill-red-500">
+        {% include icons/location.svg %}
+      </div>
+
+      <div class="text-2xs">
+        <h6 class="mb-1 text-zinc-500">Adres</h6>
+        <p class="text-zinc-700 m-0">{{ site.address }}</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <div class="p-[14px] w-12 border-1 border-red-500 border-solid *:fill-red-500">
+        {% include icons/mail.svg %}
+      </div>
+
+      <div class="text-2xs">
+        <h6 class="mb-1 text-zinc-500">E-mail</h6>
+        <p class="text-zinc-700 m-0">{{ site.emails.first }}</p>
+      </div>
+    </div>
+  </div>
+</div>

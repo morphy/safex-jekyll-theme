@@ -1,0 +1,26 @@
+{% assign src = include.src | prepend: 'assets/images' %}
+{% assign loading = include.loading | default: 'eager' %}
+{% assign class = include.class | default: 'size-full object-cover' %}
+{% assign alt = include.alt | default: '' %}
+
+<picture>
+  {% comment %}<source{% endcomment %}
+  {% comment %}srcset="{{ src | append: '.avif' | relative_url }}"{% endcomment %}
+  {% comment %}type="image/avif"{% endcomment %}
+  {% comment %}>{% endcomment %}
+  <source
+    srcset="{{ src | append: '.webp' | relative_url }}"
+    type="image/webp"
+  >
+  <source
+    srcset="{{ src | append: '.jpg' | relative_url }}"
+    type="image/jpg"
+  >
+
+  <img
+    class="{{ class }}"
+    alt="{{ alt }}"
+    loading="{{ loading }}"
+    src="{{ src | append: '.jpg' | relative_url }}"
+  >
+</picture>

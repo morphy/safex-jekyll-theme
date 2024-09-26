@@ -1,0 +1,7 @@
+{
+  "tabWidth": 2,
+  "endOfLine": "lf",
+  "trailingComma": "none",
+  "plugins": ["@shopify/prettier-plugin-liquid"],
+  "proseWrap": "always"
+}

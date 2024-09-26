@@ -1,0 +1,23 @@
+{% if page.layout == 'home' %}
+  {% assign limit = 9 %}
+  {% assign class = 'basis-1/2 sm:basis-1/3' %}
+{% else %}
+  {% assign class = 'basis-1/2 sm:basis-1/3 md:basis-1/4 xl:basis-1/5' %}
+{% endif %}
+
+<div class="flex flex-wrap border-t-1 border-l-1 border-solid border-gray-200">
+  {% for partner in site.data.partners limit: limit %}
+    <div
+      class="{{ class }} p-6 flex items-center justify-center border-b-1 border-r-1 border-solid border-gray-200"
+    >
+      <a href="{{ partner.href }}">
+        <img
+          src="{{ partner.image | prepend: 'assets/images' | append: '-120x.png' | relative_url }}"
+          alt="{{ partner.name }}"
+          loading="lazy"
+          class="w-[90px] sm:w-[120px]"
+        >
+      </a>
+    </div>
+  {% endfor %}
+</div>

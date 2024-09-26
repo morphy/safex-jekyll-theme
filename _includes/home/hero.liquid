@@ -1,0 +1,21 @@
+<section class="relative">
+  {% include image.liquid src='/bg/bg1-1920x400' class='absolute inset-0 -z-10 size-full object-cover' %}
+
+  <div class="bg-black/60">
+    <div class="container py-28 md:py-32 xl:py-52 lg:pr-80">
+      <h2 class="text-center md:text-left text-white text-base sm:text-[22px] xl:text-xl">
+        {{ page.heroTop }}
+      </h2>
+
+      <h1
+        class="text-center md:text-left text-white text-[30px] sm:text-[36px] md:text-[40px] lg:text-[45px] xl:text-[50px] font-medium leading-[1.15] my-8 sm:my-4"
+      >
+        {{ page.hero }}
+      </h1>
+
+      <p class="text-center md:text-left text-white text-sm">
+        {{ page.heroBottom }}
+      </p>
+    </div>
+  </div>
+</section>

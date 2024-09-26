@@ -1,0 +1,67 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xxl:gap-6">
+  <div class="flex items-center gap-4 overflow-hidden">
+    <div class="w-[70px] p-[25px] xl:w-[90px] xl:p-[35px] shrink-0 rounded-full bg-gray-650 *:fill-white">
+      {% include icons/phone.svg %}
+    </div>
+
+    <div>
+      <h4 class="mb-1 text-white text-sm font-semibold tracking-wider">Telefon</h4>
+      <p class="m-0 text-white">
+        <a
+          class="text-white no-underline hover:underline"
+          href="{{ site.phones.first.number | remove: ' ' | prepend: 'tel:' }}"
+        >
+          {{- site.phones.first.number -}}
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-4 overflow-hidden">
+    <div class="w-[70px] p-[25px] xl:w-[90px] xl:p-[35px] shrink-0 rounded-full bg-gray-650 *:fill-white">
+      {% include icons/mail.svg %}
+    </div>
+
+    <div>
+      <h4 class="mb-1 text-white text-sm font-semibold tracking-wider">E-mail</h4>
+      <p class="m-0 text-white">
+        <a
+          class="text-white no-underline hover:underline"
+          href="{{ site.emails.first | prepend: 'mailto:' }}"
+        >
+          {{- site.emails.first -}}
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-4 overflow-hidden">
+    <div class="w-[70px] p-[25px] xl:w-[90px] xl:p-[35px] shrink-0 rounded-full bg-gray-650 *:fill-white">
+      {% include icons/location.svg %}
+    </div>
+
+    <div>
+      <h4 class="mb-1 text-white text-sm font-semibold tracking-wider">Adres</h4>
+      <p class="m-0 text-white">
+        <a
+          class="text-white no-underline hover:underline"
+          target="_blank"
+          href="{{ site.addressHref }}"
+        >
+          {{- site.address -}}
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-4 overflow-hidden">
+    <div class="w-[70px] p-[25px] xl:w-[90px] xl:p-[35px] shrink-0 rounded-full bg-gray-650 *:fill-white">
+      {% include icons/clock.svg %}
+    </div>
+
+    <div>
+      <h4 class="mb-1 text-white text-sm font-semibold tracking-wider">Godziny pracy</h4>
+      <p class="m-0 text-white">{{ site.openingHours }}</p>
+    </div>
+  </div>
+</div>

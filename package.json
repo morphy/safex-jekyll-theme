@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "dev": "cross-env JEKYLL_ENV=development concurrently --kill-others \"bundle exec jekyll serve --livereload --incremental\" \"npx tailwindcss -i .\\assets\\css\\index.scss -o .\\assets\\main.css --watch\"",
+    "build": "cross-env JEKYLL_ENV=production bundle exec jekyll build",
+    "build:images": "node image-converter.mjs"
+  },
+  "devDependencies": {
+    "@shopify/prettier-plugin-liquid": "^1.5.0",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "fs-extra": "^11.2.0",
+    "glob": "^11.0.0",
+    "prettier": "^3.3.2",
+    "recursive-readdir": "^2.2.3",
+    "sharp": "^0.33.4",
+    "tailwindcss": "^3.4.4"
+  }
+}

@@ -1,0 +1,25 @@
+<header class="relative h-80">
+  {% include image.liquid src='/bg/bg1-1920x400' %}
+
+  <div class="absolute inset-0 bg-black/75 flex items-center justify-center">
+    <div class="flex flex-col items-center justify-center px-10">
+      <hr class="w-full h-2 border-2 border-zinc-600 border-l-0 border-r-0">
+
+      <h1 class="pt-8 text-white text-2xl text-center font-medium">{{ page.title }}</h1>
+
+      <ol class="pb-8 mt-2.5 flex flex-wrap justify-center items-center gap-2 text-white text-2xs text-center">
+        {% for breadcrumb in page.breadcrumbs %}
+          {% if forloop.index != 1 %}
+            <li>/</li>
+          {% endif %}
+
+          <li>
+            <a class="hover:underline" href="{{ breadcrumb.href }}">{{ breadcrumb.link }}</a>
+          </li>
+        {% endfor %}
+      </ol>
+
+      <hr class="w-full h-2 border-2 border-zinc-600 border-l-0 border-r-0">
+    </div>
+  </div>
+</header>
