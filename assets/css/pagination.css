@@ -1,0 +1,7 @@
+.page-numbers {
+    @apply flex items-center justify-center text-white w-10 h-10 bg-gray-750 duration-200 hover:bg-red-500;
+}
+
+.page-numbers.current {
+    @apply bg-red-500;
+}
