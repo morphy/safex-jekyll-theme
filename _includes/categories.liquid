@@ -1,11 +1,10 @@
 {% if page.categoryFilter %}
-  {% assign categories = site.categories
-    | where_exp: 'category', 'page.categoryFilter contains category.slug'
-    | sort: 'order'
-  %}
+  {% assign categories = site.categories | where_exp: 'category', 'page.categoryFilter contains category.slug' %}
 {% else %}
   {% assign categories = site.categories %}
 {% endif %}
+
+{% assign categories = categories | sort: 'order' %}
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
   {% for category in categories %}
