@@ -1,4 +1,4 @@
-{% assign services = site.services | where_exp: 'service', 'service.url contains page.url' %}
+{% assign services = site.services | where_exp: 'service', 'service.url contains page.url' | sort: 'order' %}
 
 <div class="container flex flex-col gap-10">
   {% for service in services %}
