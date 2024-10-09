@@ -1,5 +1,8 @@
 {% if page.categoryFilter %}
-  {% assign categories = site.categories | where_exp: 'category', 'page.categoryFilter contains category.slug' %}
+  {% assign categories = site.categories
+    | where_exp: 'category', 'page.categoryFilter contains category.slug'
+    | sort: 'order'
+  %}
 {% else %}
   {% assign categories = site.categories %}
 {% endif %}
