@@ -4,9 +4,9 @@
     class="sm:h-28 py-6 sm:py-0 px-8 sm:-mt-14 flex flex-col sm:flex-row items-center justify-between gap-6 bg-red-500 bg-no-repeat bg-cover"
     style="background-image: url('{{ "assets/images/cta-bg.jpg" | relative_url }}')"
   >
-    <h3 class="text-white text-lg text-center font-semibold tracking-wider">{{ site.footerCta }}</h3>
+    <h3 class="text-white text-lg text-center font-semibold tracking-wider">{{ site.data.info.footerCta }}</h3>
     <div class="button">
-      <a href="{{ site.footerCtaHref }}">{{ site.footerCtaLink }}</a>
+      <a href="{{ site.data.info.footerCtaHref }}">{{ site.data.info.footerCtaLink }}</a>
     </div>
   </div>
 </div>
