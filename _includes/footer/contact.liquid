@@ -9,9 +9,9 @@
       <p class="m-0 text-white">
         <a
           class="text-white no-underline hover:underline"
-          href="{{ site.phones.first.number | remove: ' ' | prepend: 'tel:' }}"
+          href="{{ site.data.info.phones.first.number | remove: ' ' | prepend: 'tel:' }}"
         >
-          {{- site.phones.first.number -}}
+          {{- site.data.info.phones.first.number -}}
         </a>
       </p>
     </div>
@@ -27,9 +27,9 @@
       <p class="m-0 text-white">
         <a
           class="text-white no-underline hover:underline"
-          href="{{ site.emails.first | prepend: 'mailto:' }}"
+          href="{{ site.data.info.emails.first | prepend: 'mailto:' }}"
         >
-          {{- site.emails.first -}}
+          {{- site.data.info.emails.first -}}
         </a>
       </p>
     </div>
@@ -46,9 +46,9 @@
         <a
           class="text-white no-underline hover:underline"
           target="_blank"
-          href="{{ site.addressHref }}"
+          href="{{ site.data.info.addressHref }}"
         >
-          {{- site.address -}}
+          {{- site.data.info.address -}}
         </a>
       </p>
     </div>
@@ -61,7 +61,7 @@
 
     <div>
       <h4 class="mb-1 text-white text-sm font-semibold tracking-wider">Godziny pracy</h4>
-      <p class="m-0 text-white">{{ site.openingHours }}</p>
+      <p class="m-0 text-white">{{ site.data.info.openingHours }}</p>
     </div>
   </div>
 </div>

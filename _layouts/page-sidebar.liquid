@@ -1,7 +1,6 @@
 ---
 layout: default
 ---
-
 <section class="container grid grid-cols-12 gap-10 pt-16 pb-24">
   <div class="col-span-12 md:col-span-6 lg:col-span-7 xl:col-span-8">
     <div class="text-center mb-12">
@@ -30,9 +29,9 @@ layout: default
             <a
               class="text-white"
               target="_blank"
-              href="{{ site.addressHref }}"
+              href="{{ site.data.info.addressHref }}"
             >
-              {{- site.address -}}
+              {{- site.data.info.address -}}
             </a>
           </p>
         </div>
@@ -51,7 +50,7 @@ layout: default
           <h3 class="text-white font-semibold uppercase tracking-wider">Zadzwoń do nas</h3>
 
           <p class="mb-0 mt-1 text-white">
-            {% for phone in site.phones %}
+            {% for phone in site.data.info.phones %}
               {{ phone.title }}:
               <a
                 class="text-white"
@@ -81,7 +80,7 @@ layout: default
           <h3 class="text-white font-semibold uppercase tracking-wider">Wyślij wiadomość</h3>
 
           <p class="mb-0 mt-1 text-white">
-            {% for email in site.emails %}
+            {% for email in site.data.info.emails %}
               <a
                 class="text-white"
                 href="{{ email | prepend: 'mailto:' }}"

@@ -44,7 +44,7 @@
           </a>
 
           <div class="flex-1 content">
-            {{ service.content | truncatewords: site.excerptLength | markdownify }}
+            {{ service.content | truncatewords: site.data.info.excerptLength | markdownify }}
           </div>
 
           <div class="mt-5">

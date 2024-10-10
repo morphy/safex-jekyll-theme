@@ -1,7 +1,7 @@
 <div class="container flex items-center justify-between gap-6 py-8 flex-col lg:flex-row">
   <a href="{{ site.baseurl }}" rel="home" class="block">
     <img
-      src="{{ site.logo | relative_url }}"
+      src="{{ site.data.info.logo | relative_url }}"
       alt="Safex"
       class="w-[150px]"
     >
@@ -15,7 +15,7 @@
 
       <div class="text-2xs">
         <h6 class="mb-1 text-zinc-500">Telefon</h6>
-        <p class="text-zinc-700 m-0">{{ site.phones.first.number }}</p>
+        <p class="text-zinc-700 m-0">{{ site.data.info.phones.first.number }}</p>
       </div>
     </div>
 
@@ -26,7 +26,7 @@
 
       <div class="text-2xs">
         <h6 class="mb-1 text-zinc-500">Adres</h6>
-        <p class="text-zinc-700 m-0">{{ site.address }}</p>
+        <p class="text-zinc-700 m-0">{{ site.data.info.address }}</p>
       </div>
     </div>
 
@@ -37,7 +37,7 @@
 
       <div class="text-2xs">
         <h6 class="mb-1 text-zinc-500">E-mail</h6>
-        <p class="text-zinc-700 m-0">{{ site.emails.first }}</p>
+        <p class="text-zinc-700 m-0">{{ site.data.info.emails.first }}</p>
       </div>
     </div>
   </div>
