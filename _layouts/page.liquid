@@ -11,7 +11,7 @@ layout: default
 
   <div class="content lg:w-4/5 mx-auto">{{ content }}</div>
 
-  {% if page.bottomInclude %}
-    {% include {{ page.bottomInclude }} %}
+  {% if layout.include %}
+    {% include {{ layout.include }} %}
   {% endif %}
 </section>

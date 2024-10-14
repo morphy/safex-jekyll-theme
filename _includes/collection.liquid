@@ -1,0 +1,28 @@
+{% assign imageDirectory = page.path | split: '/' | pop | join: '/' %}
+{% assign files = site.emptyArray %}
+
+{% directory path: imageDirectory exclude: .md$ %}
+{% if file.name contains '.' %}
+  {% assign cleanFilename = file.url | remove_first: '_' | split: '.' | pop | join: '.' %}
+
+  {% assign files = files | push: cleanFilename %}
+{% endif %}
+{% enddirectory %}
+
+<section class="container flex flex-col gap-12 pt-16 pb-24">
+  <div class="text-center lg:w-4/5 mx-auto">
+    {% include subtitle.liquid %}
+  </div>
+
+  <div class="lg:w-4/5 mx-auto">
+    {% include content.liquid %}
+  </div>
+
+  {% unless page.galleryOnlyInLeafNodes %}
+    {% include gallery.liquid files=files %}
+  {% endunless %}
+
+  {% include directories.liquid %}
+
+  {% include files.liquid %}
+</section>

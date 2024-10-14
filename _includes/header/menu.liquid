@@ -1,0 +1,25 @@
+{% if site.pages %}
+  <nav class="bg-gray-750">
+    <ul class="container flex flex-wrap text-white justify-evenly md:justify-start">
+      {% assign sitePages = site.pages
+        | sort: 'order'
+        | where_exp: 'page', 'page.hideInNav != true'
+        | where_exp: 'page', 'page.title'
+      %}
+
+      {% for sitePage in sitePages %}
+        {% assign classes = 'duration-75 hover:bg-red-500' %}
+
+        {% if page.url == sitePage.url or (page.url contains sitePage.url and sitePage.url != '/') %}
+          {% assign classes = 'duration-75 hover:bg-red-500 bg-red-500' %}
+        {% endif %}
+
+        <li class="{{ classes }}">
+          <a class="block p-5 text-2xs uppercase" href="{{ sitePage.url | relative_url }}">
+            {{ sitePage.title }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}
