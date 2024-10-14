@@ -1,0 +1,159 @@
+---
+layout: default
+---
+{% assign collection = site[page.collection] %}
+
+{% assign firstDirectoryNodes = site.emptyArray %}
+{% assign secondDirectoryNodes = site.emptyArray %}
+
+{% assign fileNodes = site.emptyArray %}
+{% assign leafDirectoryNodes = site.emptyArray %}
+{% assign directoryNodes = site.emptyArray %}
+
+{% for node in collection %}
+  {% comment %}
+    Iterate over all nodes and calculate their level difference
+  {% endcomment %}
+
+  {% assign nodePath = node.path | split: '/' | pop %}
+  {% assign currentPath = page.path | split: '/' | pop %}
+
+  {% assign diff = nodePath.size | minus: currentPath.size %}
+
+  {% if diff == 0 %}
+    {% comment %}
+      A file, but it might be located in a different directory
+    {% endcomment %}
+
+    {% assign isFile = true %}
+
+    {% for pathPart in currentPath %}
+      {% comment %}
+        Check if the node is located in current directory by checking if its path
+        starts with the current directory path
+      {% endcomment %}
+
+      {% if nodePath[forloop.index0] != currentPath[forloop.index0] %}
+        {% assign isFile = false %}
+      {% endif %}
+    {% endfor %}
+
+    {% if isFile %}
+      {% assign fileNodes = fileNodes | push: node %}
+    {% endif %}
+  {% endif %}
+
+  {% if diff == 2 %}
+    {% comment %}
+      It might be a second level subdirectory of the current directory
+    {% endcomment %}
+
+    {% assign isSecondDirectory = true %}
+
+    {% for pathPart in currentPath %}
+      {% comment %}
+        Check if the node is, a subdirectory of the current directory by checking
+        if its path starts with the current directory path
+      {% endcomment %}
+
+      {% if nodePath[forloop.index0] != currentPath[forloop.index0] %}
+        {% assign isSecondDirectory = false %}
+      {% endif %}
+    {% endfor %}
+
+    {% if isSecondDirectory %}
+      {% assign secondDirectoryNodes = secondDirectoryNodes | push: node %}
+    {% endif %}
+  {% endif %}
+
+  {% if diff == 1 %}
+    {% comment %}
+      It might be a subdirectory of the current directory
+    {% endcomment %}
+
+    {% assign isDirectory = true %}
+
+    {% for pathPart in currentPath %}
+      {% comment %}
+        Check if the node is, a subdirectory of the current directory by checking
+        if its path starts with the current directory path
+      {% endcomment %}
+
+      {% if nodePath[forloop.index0] != currentPath[forloop.index0] %}
+        {% assign isDirectory = false %}
+      {% endif %}
+    {% endfor %}
+
+    {% comment %}
+      Check if it's an index file to prevent duplicates (there can be mutiple
+      files inside a directory, hence the possibility of duplicates)
+    {% endcomment %}
+
+    {% assign fullNodePath = node.path | split: '/' %}
+
+    {% if isDirectory and fullNodePath.last == 'index.md' %}
+      {% assign firstDirectoryNodes = firstDirectoryNodes | push: node %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% comment %}
+  Divide directories into leaf directories and normal directories
+{% endcomment %}
+
+{% for firstNode in firstDirectoryNodes %}
+  {% assign firstNodePath = firstNode.path | split: '/' | pop %}
+
+  {% comment %}
+    Check if first directory is a parent for any subdirectories - if it's not
+    then it's a leaf directory
+  {% endcomment %}
+
+  {% for secondNode in secondDirectoryNodes %}
+    {% assign secondNodePath = secondNode.path | split: '/' | pop %}
+
+    {% comment %}
+      Assume it is the parent for the current subdirectory and try to prove
+      this assumption wrong
+    {% endcomment %}
+
+    {% assign isParentDirectory = true %}
+
+    {% for pathPart in firstNodePath %}
+      {% if firstNodePath[forloop.index0] != secondNodePath[forloop.index0] %}
+        {% assign isParentDirectory = false %}
+      {% endif %}
+    {% endfor %}
+
+    {% if isParentDirectory %}
+      {% unless directoryNodes contains firstNode %}
+        {% assign directoryNodes = directoryNodes | push: firstNode %}
+      {% endunless %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %}
+  Filter out leaf directories
+{% endcomment %}
+{% for firstNode in firstDirectoryNodes %}
+  {% unless directoryNodes contains firstNode %}
+    {% assign leafDirectoryNodes = leafDirectoryNodes | push: firstNode %}
+  {% endunless %}
+{% endfor %}
+
+{% if page.displayLeafDirectoriesAsFiles %}
+  {% assign fileNodes = leafDirectoryNodes | concat: fileNodes %}
+{% else %}
+  {% assign directoryNodes = leafDirectoryNodes | concat: directoryNodes %}
+{% endif %}
+
+{% if directoryNodes.size == 0
+  and leafDirectoryNodes.size == 0
+  and fileNodes.size <= 1
+  and page.useCustomSingleNodePage
+%}
+  {% include single-node.liquid %}
+{% else %}
+  {% include collection.liquid %}
+{% endif %}

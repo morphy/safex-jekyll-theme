@@ -1,0 +1,33 @@
+{% unless directoryNodes.size == 0 %}
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+    {% for node in directoryNodes %}
+      {% assign url = node.url | remove: 'index.html' | relative_url %}
+
+      <article class="flex flex-col">
+        <a href="{{ url }}">
+          <div class="h-52">
+            {% assign image = category.url | append: category.slug | append: '-540x210' %}
+
+            {% include image.liquid src=image %}
+          </div>
+
+          <h2 class="p-4 text-center text-white font-semibold tracking-wide duration-200 bg-red-500 hover:bg-gray-750">
+            {{ node.title }}
+          </h2>
+        </a>
+
+        <div class="flex flex-col flex-1 bg-neutral-100 border-solid border-1 border-gray-200">
+          <div class="flex-1 p-6 mb-10 text-zinc-500">
+            {{ node.content | truncatewords: 20 }}
+          </div>
+
+          <div class="text-right">
+            <div class="arrow">
+              <a href="{{ url }}">Realizacje</a>
+            </div>
+          </div>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+{% endunless %}
