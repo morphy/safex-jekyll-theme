@@ -1,21 +1,35 @@
-{% assign src = include.src | prepend: 'assets/images' %}
+{% assign src = include.src %}
 {% assign loading = include.loading | default: 'eager' %}
 {% assign class = include.class | default: 'size-full object-cover' %}
 {% assign alt = include.alt | default: '' %}
+{% assign resolution = include.resolution | default: '' %}
 
 <picture>
-  {% comment %}<source{% endcomment %}
-  {% comment %}srcset="{{ src | append: '.avif' | relative_url }}"{% endcomment %}
-  {% comment %}type="image/avif"{% endcomment %}
-  {% comment %}>{% endcomment %}
-  <source
-    srcset="{{ src | append: '.webp' | relative_url }}"
-    type="image/webp"
-  >
-  <source
-    srcset="{{ src | append: '.jpg' | relative_url }}"
-    type="image/jpg"
-  >
+  {% if jekyll.environment == 'production' %}
+    {% assign src = src | append: '@' | append: resolution %}
+
+    <source
+      srcset="{{ src | append: '.avif' | relative_url }}"
+      type="image/avif"
+    >
+
+    <source
+      srcset="{{ src | append: '.webp' | relative_url }}"
+      type="image/webp"
+    >
+
+    <source
+      srcset="{{ src | append: '.jpg' | relative_url }}"
+      type="image/jpg"
+    >
+  {% endif %}
+
+  {% if jekyll.environment == 'development' %}
+    <source
+      srcset="{{ src | append: '.jpg' | relative_url }}"
+      type="image/jpg"
+    >
+  {% endif %}
 
   <img
     class="{{ class }}"
