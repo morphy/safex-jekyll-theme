@@ -6,7 +6,7 @@
       <article class="flex flex-col">
         <a href="{{ url }}">
           <div class="h-52">
-            {% assign image = category.url | append: category.slug | append: '-540x210' %}
+            {% assign image = node.path | remove_first: '_' | split: '.' | pop | join: '.' %}
 
             {% include image.liquid src=image %}
           </div>

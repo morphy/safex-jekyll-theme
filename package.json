@@ -5,6 +5,7 @@
     "build:images": "node image-converter.mjs"
   },
   "devDependencies": {
+    "@prettier/plugin-xml": "^3.4.1",
     "@shopify/prettier-plugin-liquid": "^1.5.0",
     "concurrently": "^8.2.2",
     "cross-env": "^7.0.3",
