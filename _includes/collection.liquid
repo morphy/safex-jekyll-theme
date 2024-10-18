@@ -10,9 +10,11 @@
 {% enddirectory %}
 
 <section class="container flex flex-col gap-12 pt-16 pb-24">
-  <div class="text-center lg:w-4/5 mx-auto">
-    {% include subtitle.liquid %}
-  </div>
+  {% if page.subtitle %}
+    <div class="text-center lg:w-4/5 mx-auto">
+      {% include subtitle.liquid %}
+    </div>
+  {% endif %}
 
   <div class="lg:w-4/5 mx-auto">
     {% include content.liquid %}
