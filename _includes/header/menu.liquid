@@ -1,25 +1,50 @@
-{% if site.pages %}
-  <nav class="bg-gray-750">
-    <ul class="container flex flex-wrap text-white justify-evenly md:justify-start">
-      {% assign sitePages = site.pages
-        | sort: 'order'
-        | where_exp: 'page', 'page.hideInNav != true'
-        | where_exp: 'page', 'page.title'
-      %}
+<nav class="bg-gray-750">
+  <ul class="container flex flex-wrap text-white justify-evenly md:justify-start">
+    {% assign collectionDocuments = site.emptyArray %}
 
-      {% for sitePage in sitePages %}
+    {% for collection in site.collections %}
+      {% assign collectionDocuments = collectionDocuments | concat: collection.docs %}
+    {% endfor %}
+
+    {% for path in site.data.order.pageOrder %}
+      {% assign document = site.pages | where: 'path', path | first %}
+
+      {% unless document %}
+        {% assign document = collectionDocuments | where: 'path', path | first %}
+      {% endunless %}
+
+      {% unless document.hideInNav %}
+        {% assign url = document.url | relative_url %}
+        {% assign title = document.title %}
+
         {% assign classes = 'duration-75 hover:bg-red-500' %}
 
-        {% if page.url == sitePage.url or (page.url contains sitePage.url and sitePage.url != '/') %}
+        {% assign currentPathMatches = false %}
+        {% assign containsParentPath = false %}
+
+        {% if page.path == document.path %}
+          {% assign currentPathMatches = true %}
+        {% endif %}
+
+        {% if page.collection %}
+          {% assign cleanCurrentPath = page.path | remove: 'index.md' %}
+          {% assign cleanDocumentPath = document.path | remove: 'index.md' %}
+
+          {% if cleanCurrentPath contains cleanDocumentPath %}
+            {% assign containsParentPath = true %}
+          {% endif %}
+        {% endif %}
+
+        {% if currentPathMatches or containsParentPath %}
           {% assign classes = 'duration-75 hover:bg-red-500 bg-red-500' %}
         {% endif %}
 
         <li class="{{ classes }}">
-          <a class="block p-5 text-2xs uppercase" href="{{ sitePage.url | relative_url }}">
-            {{ sitePage.title }}
+          <a class="block p-5 text-2xs uppercase" href="{{ url | remove: 'index.html'}}">
+            {{ title }}
           </a>
         </li>
-      {% endfor %}
-    </ul>
-  </nav>
-{% endif %}
+      {% endunless %}
+    {% endfor %}
+  </ul>
+</nav>
