@@ -8,15 +8,44 @@
       <h1 class="pt-8 text-white text-2xl text-center font-medium">{{ page.title }}</h1>
 
       <ol class="pb-8 mt-2.5 flex flex-wrap justify-center items-center gap-2 text-white text-2xs text-center">
-        {% for breadcrumb in page.breadcrumbs %}
-          {% if forloop.index != 1 %}
+        {% assign homepage = site.pages | where: 'url', site.baseurl | first %}
+
+        <li>
+          <a class="hover:underline" href="{{ homepage.url }}">{{ homepage.title }}</a>
+        </li>
+
+        {% if page.collection %}
+          {% assign pathParts = page.path | split: '/' %}
+          {% assign linksCount = pathParts.size | minus: 1 %}
+
+          {% for i in (1..linksCount) reversed %}
             <li>/</li>
-          {% endif %}
+
+            {% assign path = page.path %}
+
+            {% for j in (1..i) %}
+              {% assign path = path | split: '/' | pop | join: '/' %}
+            {% endfor %}
+
+            {% assign path = path | append: '/index.md' %}
+
+            {% assign document = site.documents | where: 'path', path | first %}
+
+            <li>
+              <a class="hover:underline" href="{{ document.url | remove: "index.html" | relative_url }}">
+                {{ document.title }}
+              </a>
+            </li>
+          {% endfor %}
+        {% else %}
+          <li>/</li>
 
           <li>
-            <a class="hover:underline" href="{{ breadcrumb.href }}">{{ breadcrumb.link }}</a>
+            <a class="hover:underline" href="{{ page.url | relative_url }}">
+              {{ page.title }}
+            </a>
           </li>
-        {% endfor %}
+        {% endif %}
       </ol>
 
       <hr class="w-full h-2 border-2 border-zinc-600 border-l-0 border-r-0">
