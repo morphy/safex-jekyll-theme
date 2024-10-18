@@ -6,6 +6,8 @@
 
 {% unless fileNodes.size <= lowestNumberOfFiles %}
   <div class="flex flex-col gap-10">
+    {% assign fileNodes = fileNodes | sort: 'order' %}
+
     {% for node in fileNodes %}
       {% assign isItself = false %}
 
