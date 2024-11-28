@@ -78,6 +78,7 @@ layout: default
 
           <p class="mb-0 mt-1 text-white">
             {% for email in site.data.info.emails %}
+              Email:
               <a
                 class="text-white"
                 href="{{ email | prepend: 'mailto:' }}"
@@ -89,6 +90,16 @@ layout: default
                 <br>
               {% endif %}
             {% endfor %}
+
+            <br>
+
+            WhatsApp:
+            <a
+              class="text-white"
+              href="{{ site.data.info.whatsapp | remove: ' ' | prepend: 'https://wa.me/' }}"
+            >
+              {{ site.data.info.whatsapp }}
+            </a>
           </p>
         </div>
       </div>

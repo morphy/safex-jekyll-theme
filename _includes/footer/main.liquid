@@ -1,9 +1,3 @@
-{% assign sitePages = site.pages
-  | sort: 'order'
-  | where_exp: 'page', 'page.hideInNav != true'
-  | where_exp: 'page', 'page.title'
-%}
-
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
   <div>
     <img
@@ -20,22 +14,49 @@
 
     <div class="flex flex-row gap-8">
       <ul>
-        {% for sitePage in sitePages %}
-          <li class="flex py-2 text-xs text-gray-450 relative before:content-['\25B8'] before:pr-5">
-            <a class="hover:text-red-500 duration-200 block" href="{{ sitePage.url | relative_url }}">
-              {{ sitePage.title }}
-            </a>
-          </li>
+        {% assign menuPages = site.pages | sort: 'order' %}
+
+        {% for menuPage in menuPages %}
+          {% unless menuPage.hideInNav %}
+            <li class="flex py-2 text-xs text-gray-450 relative before:content-['\25B8'] before:pr-5">
+              <a
+                class="hover:text-red-500 duration-200 block"
+                href="{{ menuPage.url | relative_url | remove: 'index.html' }}"
+              >
+                {{ menuPage.title }}
+              </a>
+            </li>
+          {% endunless %}
         {% endfor %}
       </ul>
 
       <ul>
-        {% for category in site.categories %}
-          <li class="flex py-2 text-xs text-gray-450 relative before:content-['\25B8'] before:pr-5">
-            <a class="hover:text-red-500 duration-200 block" href="{{ category.url | relative_url }}">
-              {{ category.title }}
-            </a>
-          </li>
+        {% assign menuPages = site.emptyArray %}
+
+        {% for collection in site.collections %}
+          {% if collection.label == 'posts' %}
+            {% continue %}
+          {% endif %}
+
+          {% assign path = collection.label | prepend: '_' | append: '/index.md' %}
+          {% assign collectionPage = collection.docs | where: 'path', path | first %}
+
+          {% assign menuPages = menuPages | push: collectionPage %}
+        {% endfor %}
+
+        {% assign menuPages = menuPages | sort: 'order' %}
+
+        {% for menuPage in menuPages %}
+          {% unless menuPage.hideInNav %}
+            <li class="flex py-2 text-xs text-gray-450 relative before:content-['\25B8'] before:pr-5">
+              <a
+                class="hover:text-red-500 duration-200 block"
+                href="{{ menuPage.url | relative_url | remove: 'index.html' }}"
+              >
+                {{ menuPage.title }}
+              </a>
+            </li>
+          {% endunless %}
         {% endfor %}
       </ul>
     </div>

@@ -20,6 +20,17 @@
     </div>
 
     <div class="flex items-center gap-3">
+      <div class="p-[12px] w-12 border-1 border-red-500 border-solid *:fill-red-500">
+        {% include icons/whatsapp.svg %}
+      </div>
+
+      <div class="text-2xs">
+        <h6 class="mb-1 text-zinc-500">WhatsApp</h6>
+        <p class="text-zinc-700 m-0">{{ site.data.info.whatsapp }}</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3">
       <div class="p-[15px] w-12 border-1 border-red-500 border-solid *:fill-red-500">
         {% include icons/location.svg %}
       </div>
@@ -27,17 +38,6 @@
       <div class="text-2xs">
         <h6 class="mb-1 text-zinc-500">Adres</h6>
         <p class="text-zinc-700 m-0">{{ site.data.info.address }}</p>
-      </div>
-    </div>
-
-    <div class="flex items-center gap-3">
-      <div class="p-[14px] w-12 border-1 border-red-500 border-solid *:fill-red-500">
-        {% include icons/mail.svg %}
-      </div>
-
-      <div class="text-2xs">
-        <h6 class="mb-1 text-zinc-500">E-mail</h6>
-        <p class="text-zinc-700 m-0">{{ site.data.info.emails.first }}</p>
       </div>
     </div>
   </div>

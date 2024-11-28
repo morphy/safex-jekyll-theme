@@ -1,4 +1,6 @@
-{% if page.hideItselfInFileList %}
+{% assign hideItselfInFileList = page.hideItselfInFileList | default: true %}
+
+{% if hideItselfInFileList %}
   {% assign lowestNumberOfFiles = 1 %}
 {% else %}
   {% assign lowestNumberOfFiles = 0 %}
@@ -15,14 +17,17 @@
         {% assign isItself = true %}
       {% endif %}
 
-      {% unless isItself and page.hideItselfInFileList %}
-        {% assign url = node.url | remove: 'index.html' | relative_url %}
+      {% unless isItself and hideItselfInFileList %}
+        {% if node.overrides.url %}
+          {% assign url = node.overrides.url | relative_url %}
+        {% else %}
+          {% assign url = node.url | remove: 'index.html' | relative_url %}
+        {% endif %}
 
         <article class="flex flex-col md:flex-row">
           <div class="w-full md:w-72 lg:w-96 h-64 md:h-auto">
             <a href="{{ url }}">
-              {% assign splitPath = node.path | split: '/' | pop %}
-              {% assign name = splitPath.last | append: '-1' %}
+              {% assign name = node.path | split: '/' | pop | last | append: '-1' %}
 
               {% assign image = node.url
                 | remove_first: '_'

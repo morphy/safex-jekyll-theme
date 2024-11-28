@@ -1,42 +1,32 @@
 <nav class="bg-gray-750">
   <ul class="container flex flex-wrap text-white justify-evenly md:justify-start">
-    {% assign collectionDocuments = site.emptyArray %}
+    {% assign menuPages = site.pages %}
 
     {% for collection in site.collections %}
-      {% assign collectionDocuments = collectionDocuments | concat: collection.docs %}
+      {% if collection.label == 'posts' %}
+        {% continue %}
+      {% endif %}
+
+      {% assign path = collection.label | prepend: '_' | append: '/index.md' %}
+      {% assign collectionPage = collection.docs | where: 'path', path | first %}
+
+      {% assign menuPages = menuPages | push: collectionPage %}
     {% endfor %}
 
-    {% for path in site.data.order.pageOrder %}
-      {% assign document = site.pages | where: 'path', path | first %}
+    {% assign menuPages = menuPages | sort: 'order' %}
 
-      {% unless document %}
-        {% assign document = collectionDocuments | where: 'path', path | first %}
-      {% endunless %}
-
-      {% unless document.hideInNav %}
-        {% assign url = document.url | relative_url %}
-        {% assign title = document.title %}
+    {% for menuPage in menuPages %}
+      {% unless menuPage.hideInNav %}
+        {% assign url = menuPage.url | relative_url %}
+        {% assign title = menuPage.title %}
 
         {% assign classes = 'duration-75 hover:bg-red-500' %}
 
-        {% assign currentPathMatches = false %}
-        {% assign containsParentPath = false %}
+        {% assign currentPath = page.path | remove: 'index.md' %}
+        {% assign documentPath = menuPage.path | remove: 'index.md' %}
 
-        {% if page.path == document.path %}
-          {% assign currentPathMatches = true %}
-        {% endif %}
-
-        {% if page.collection %}
-          {% assign cleanCurrentPath = page.path | remove: 'index.md' %}
-          {% assign cleanDocumentPath = document.path | remove: 'index.md' %}
-
-          {% if cleanCurrentPath contains cleanDocumentPath %}
-            {% assign containsParentPath = true %}
-          {% endif %}
-        {% endif %}
-
-        {% if currentPathMatches or containsParentPath %}
-          {% assign classes = 'duration-75 hover:bg-red-500 bg-red-500' %}
+        {% if menuPage.path == page.path or (currentPath contains documentPath and page.collection) %}
+          {% assign classes = classes | append: ' bg-red-500' %}
         {% endif %}
 
         <li class="{{ classes }}">

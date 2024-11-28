@@ -43,29 +43,6 @@ layout: default
     {% endif %}
   {% endif %}
 
-  {% if diff == 2 %}
-    {% comment %}
-      It might be a second level subdirectory of the current directory
-    {% endcomment %}
-
-    {% assign isSecondDirectory = true %}
-
-    {% for pathPart in currentPath %}
-      {% comment %}
-        Check if the node is, a subdirectory of the current directory by checking
-        if its path starts with the current directory path
-      {% endcomment %}
-
-      {% if nodePath[forloop.index0] != currentPath[forloop.index0] %}
-        {% assign isSecondDirectory = false %}
-      {% endif %}
-    {% endfor %}
-
-    {% if isSecondDirectory %}
-      {% assign secondDirectoryNodes = secondDirectoryNodes | push: node %}
-    {% endif %}
-  {% endif %}
-
   {% if diff == 1 %}
     {% comment %}
       It might be a subdirectory of the current directory
@@ -93,6 +70,29 @@ layout: default
 
     {% if isDirectory and fullNodePath.last == 'index.md' %}
       {% assign firstDirectoryNodes = firstDirectoryNodes | push: node %}
+    {% endif %}
+  {% endif %}
+
+  {% if diff == 2 %}
+    {% comment %}
+      It might be a second level subdirectory of the current directory
+    {% endcomment %}
+
+    {% assign isSecondDirectory = true %}
+
+    {% for pathPart in currentPath %}
+      {% comment %}
+        Check if the node is, a subdirectory of the current directory by checking
+        if its path starts with the current directory path
+      {% endcomment %}
+
+      {% if nodePath[forloop.index0] != currentPath[forloop.index0] %}
+        {% assign isSecondDirectory = false %}
+      {% endif %}
+    {% endfor %}
+
+    {% if isSecondDirectory %}
+      {% assign secondDirectoryNodes = secondDirectoryNodes | push: node %}
     {% endif %}
   {% endif %}
 {% endfor %}
@@ -142,17 +142,16 @@ layout: default
   {% endunless %}
 {% endfor %}
 
-{% if page.displayLeafDirectoriesAsFiles %}
-  {% assign fileNodes = leafDirectoryNodes | concat: fileNodes %}
+{% assign displayLeafDirectoriesAsFiles = page.displayLeafDirectoriesAsFiles | default: true %}
+{% assign useCustomSingleNodePage = page.useCustomSingleNodePage | default: true %}
+
+{% if displayLeafDirectoriesAsFiles %}
+  {% assign fileNodes = fileNodes | concat: leafDirectoryNodes %}
 {% else %}
-  {% assign directoryNodes = leafDirectoryNodes | concat: directoryNodes %}
+  {% assign directoryNodes = directoryNodes | concat: leafDirectoryNodes %}
 {% endif %}
 
-{% if directoryNodes.size == 0
-  and leafDirectoryNodes.size == 0
-  and fileNodes.size <= 1
-  and page.useCustomSingleNodePage
-%}
+{% if directoryNodes.size == 0 and leafDirectoryNodes.size == 0 and fileNodes.size <= 1 and useCustomSingleNodePage %}
   {% include single-node.liquid %}
 {% else %}
   {% include collection.liquid %}

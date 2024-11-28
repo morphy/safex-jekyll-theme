@@ -1,0 +1,28 @@
+<section class="container pt-16 pb-24">
+  <div class="text-center mb-12">
+    <div class="heading mb-12">
+      <h1>{{ page.categoriesTitle }}</h1>
+      <hr>
+    </div>
+
+    <p class="lg:w-4/5 mx-auto">
+      {{ page.categoriesDesc | markdownify | remove: '<p>' | remove: '</p>' }}
+    </p>
+  </div>
+
+  {% assign documents = site.emptyArray %}
+
+  {% for collection in site.collections %}
+    {% assign documents = documents | concat: collection.docs %}
+  {% endfor %}
+
+  {% assign directoryNodes = documents | where_exp: 'item', 'page.categoriesFilter contains item.path' %}
+
+  {% include directories.liquid %}
+
+  <div class="text-center mt-16">
+    <div class="button">
+      <a href="{{ page.categoriesHref | relative_url }}">{{ page.categoriesLink }}</a>
+    </div>
+  </div>
+</section>

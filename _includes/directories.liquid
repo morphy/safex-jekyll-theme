@@ -3,12 +3,25 @@
     {% assign directoryNodes = directoryNodes | sort: 'order' %}
 
     {% for node in directoryNodes %}
-      {% assign url = node.url | remove: 'index.html' | relative_url %}
+      {% if node.overrides.url %}
+        {% assign url = node.overrides.url | relative_url %}
+      {% else %}
+        {% assign url = node.url | remove: 'index.html' | relative_url %}
+      {% endif %}
 
       <article class="flex flex-col">
         <a href="{{ url }}">
           <div class="h-52">
-            {% assign image = node.path | remove_first: '_' | split: '.' | pop | join: '.' %}
+            {% assign name = node.path | split: '/' | pop | last %}
+
+            {% assign image = node.url
+              | remove_first: '_'
+              | split: '/'
+              | pop
+              | join: '/'
+              | append: '/'
+              | append: name
+            %}
 
             {% include image.liquid src=image %}
           </div>

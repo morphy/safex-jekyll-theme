@@ -1,3 +1,5 @@
+{% assign galleryOnlyInLeafNodes = page.galleryOnlyInLeafNodes | default: true %}
+
 {% assign imageDirectory = page.path | split: '/' | pop | join: '/' %}
 {% assign files = site.emptyArray %}
 
@@ -20,7 +22,7 @@
     {% include content.liquid %}
   </div>
 
-  {% unless page.galleryOnlyInLeafNodes %}
+  {% unless galleryOnlyInLeafNodes %}
     {% include gallery.liquid files=files %}
   {% endunless %}
 
