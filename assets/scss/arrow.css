@@ -1,33 +1,33 @@
 .arrow {
-	padding-right: 28px;
+  padding-right: 28px;
 
-	@apply inline-block bg-gray-750 duration-200 hover:bg-red-500 max-w-full;
+  @apply inline-block bg-gray-750 duration-200 hover:bg-red-500 max-w-full;
 }
 
 .arrow a {
-	height: 40px;
-	line-height: 40px;
-	padding: 0 10px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
 
-	@apply inline-block relative text-white text-2xs bg-transparent whitespace-nowrap max-w-full;
+  @apply inline-block relative text-white text-xs bg-transparent whitespace-nowrap max-w-full;
 }
 
 .arrow a:before {
-	content: "";
-	left: -20px;
-	border-width: 0 0 40px 20px;
+  content: "";
+  left: -20px;
+  border-width: 0 0 40px 20px;
 
-	@apply absolute duration-200 border-solid border-transparent border-b-gray-750;
+  @apply absolute duration-200 border-solid border-transparent border-b-gray-750;
 }
 
 .arrow a:after {
-	content: "→";
-	right: -28px;
-	padding-right: 15px;
+  content: "→";
+  right: -28px;
+  padding-right: 15px;
 
-	@apply absolute;
+  @apply absolute;
 }
 
 .arrow:hover a:before {
-	@apply border-transparent border-b-red-500;
+  @apply border-transparent border-b-red-500;
 }

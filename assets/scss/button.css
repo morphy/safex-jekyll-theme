@@ -1,37 +1,38 @@
 .button {
-	padding-right: 49px;
+  padding-right: 49px;
 
-	@apply inline-block bg-gray-750 duration-200 hover:bg-red-500 max-w-full;
+  @apply inline-block bg-gray-750 duration-200 hover:bg-red-500 max-w-full;
 }
 
 .button a {
-	padding: 0 25px;
-	height: 40px;
-	line-height: 40px;
+  padding: 0 25px;
+  height: 40px;
+  line-height: 40px;
 
-	@apply inline-block relative text-white text-2xs bg-transparent whitespace-nowrap max-w-full;
+  @apply inline-block relative text-white text-xs bg-transparent whitespace-nowrap max-w-full;
 }
 
 .button a:before {
-	content: "";
-	right: -6px;
-	border-width: 0 0 40px 20px;
+  content: "";
+  right: -6px;
+  border-width: 0 0 40px 20px;
 
-	@apply absolute duration-200 border-solid border-transparent border-b-red-500;
+  @apply absolute duration-200 border-solid border-transparent border-b-red-500;
 }
 
 .button a:after {
-	content: "→";
-	right: -49px;
-	padding: 0 15px;
+  content: "→";
+  right: -49px;
+  width: 43px;
+  padding: 0 15px;
 
-	@apply absolute bg-red-500 duration-200;
+  @apply absolute bg-red-500 duration-200;
 }
 
 .button:hover a:before {
-	@apply border-transparent border-b-gray-750;
+  @apply border-transparent border-b-gray-750;
 }
 
 .button:hover a:after {
-	@apply bg-gray-750;
+  @apply bg-gray-750;
 }
