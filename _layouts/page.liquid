@@ -1,16 +1,18 @@
 ---
-layout: default
+layout: default-page
 ---
-<section class="container flex flex-col gap-12 pt-16 pb-24">
-  {% if page.subtitle %}
-    <div class="text-center lg:w-4/5 mx-auto">
-      {% include subtitle.liquid %}
-    </div>
-  {% endif %}
+{% if page.subtitle %}
+  <div class="text-center lg:w-4/5 mx-auto">
+    {% include subtitle.liquid %}
+  </div>
+{% endif %}
 
+{% assign trimmedContent = content | strip_newlines %}
+
+{% unless trimmedContent == '' %}
   <div class="content lg:w-4/5 mx-auto">{{ content }}</div>
+{% endunless %}
 
-  {% if layout.include %}
-    {% include {{ layout.include }} %}
-  {% endif %}
-</section>
+{% if layout.include %}
+  {% include {{ layout.include }} %}
+{% endif %}
