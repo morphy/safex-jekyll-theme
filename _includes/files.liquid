@@ -24,21 +24,12 @@
           {% assign url = node.url | remove: 'index.html' | relative_url %}
         {% endif %}
 
-        <article class="flex flex-col md:flex-row">
-          <div class="w-full md:w-72 lg:w-96 h-64 md:h-auto">
+        {% include node-images.liquid %}
+
+        <article class="flex flex-col lg:flex-row">
+          <div class="lg:w-72 lg:h-auto h-48">
             <a href="{{ url }}">
-              {% assign name = node.path | split: '/' | pop | last | append: '-1' %}
-
-              {% assign image = node.url
-                | remove_first: '_'
-                | split: '/'
-                | pop
-                | join: '/'
-                | append: '/'
-                | append: name
-              %}
-
-              {% include image.liquid src=image %}
+              <img src="{{ imageFiles.first }}" alt="" class="size-full object-cover">
             </a>
           </div>
 

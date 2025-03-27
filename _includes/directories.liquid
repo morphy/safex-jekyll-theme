@@ -23,7 +23,10 @@
               | append: name
             %}
 
-            {% include image.liquid src=image %}
+      <article class="flex flex-col border-solid border border-gray-300">
+        <a href="{{ url }}">
+          <div class="h-48">
+            <img src="{{ image }}" alt="" class="size-full object-cover">
           </div>
 
           <h2 class="p-4 text-center text-white font-semibold tracking-wide duration-200 bg-red-500 hover:bg-gray-750">

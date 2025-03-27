@@ -1,8 +1,5 @@
-{% assign imageDirectory = page.path | split: '/' | pop | join: '/' %}
-{% assign files = site.emptyArray %}
-
-{% directory path: imageDirectory exclude: .md$ %}
-{% assign cleanFilename = file.url | remove_first: '_' | split: '.' | pop | join: '.' %}
+{% assign node = page %}
+{% include node-images.liquid %}
 
 {% assign files = files | push: cleanFilename %}
 {% enddirectory %}
@@ -46,10 +43,10 @@
             {{ page.content }}
           </div>
 
-          {% include gallery.liquid files=files %}
-        </div>
+        {% include node-gallery.liquid imageFiles=imageFiles %}
       </div>
-    </article>
+    </div>
+  </article>
 
     <aside class="lg:col-span-3">
       <h2 class="text-lg lg:text-xl tracking-wider">Kategorie</h2>
