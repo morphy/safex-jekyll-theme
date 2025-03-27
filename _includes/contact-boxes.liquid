@@ -1,0 +1,32 @@
+<div class="flex flex-col gap-3">
+  {% for box in page.contactBoxes %}
+    <div class="bg-red-500 p-1">
+      <div class="border border-white border-solid p-5 lg:p-7 flex items-center gap-4">
+        <div
+          class="flex-none w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center rounded-full border-2 border-solid border-white *:fill-white *:w-5 *:lg:w-6"
+        >
+          {% assign iconPath = 'icons/' | append: box.icon | append: '.svg' %}
+          {% include {{ iconPath }} %}
+        </div>
+
+        <div>
+          <h3 class="text-white font-semibold uppercase tracking-wider">{{ box.title }}</h3>
+
+          {% for line in box.lines %}
+            <p class="mb-0 mt-1 text-white">
+              {% if line.prefix %}
+                {{ line.prefix }}:
+              {% endif %}
+              <a
+                class="text-white"
+                href="{{ line.href | relative_url }}"
+              >
+                {{ line.text }}
+              </a>
+            </p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
