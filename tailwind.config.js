@@ -17,8 +17,8 @@ module.exports = {
           775: "#2c343d"
         }
       },
-      borderWidth: {
-        1: "1px"
+      spacing: {
+        18: "4.5rem"
       }
     },
     fontFamily: {
@@ -37,12 +37,12 @@ module.exports = {
     container: {
       center: true,
       padding: {
-        DEFAULT: "32px",
-        sm: "18px",
-        md: "24px",
-        lg: "16px",
-        xl: "30px",
-        xxl: "40px"
+        DEFAULT: "1rem",
+        sm: "1rem",
+        md: "1rem",
+        lg: "1.5rem",
+        xl: "2rem",
+        xxl: "2.5rem"
       }
     },
     screens: {
