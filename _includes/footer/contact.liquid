@@ -1,67 +1,26 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xxl:gap-6">
-  <div class="flex items-center gap-4 overflow-hidden">
-    <div class="w-[70px] p-[25px] xl:w-[90px] xl:p-[35px] shrink-0 rounded-full bg-gray-650 *:fill-white">
-      {% include icons/phone.svg %}
-    </div>
+  {% for contact in site.data.info.footerContacts %}
+    <div class="flex items-center gap-4 overflow-hidden">
+      <div class="w-[70px] p-[25px] xl:w-[90px] xl:p-[35px] shrink-0 rounded-full bg-gray-650 *:fill-white">
+        {% assign iconPath = 'icons/' | append: contact.icon | append: '.svg' %}
+        {% include {{ iconPath }} %}
+      </div>
 
-    <div>
-      <h4 class="mb-1 text-white text-sm font-semibold tracking-wider">Telefon</h4>
-      <p class="m-0 text-white">
-        <a
-          class="text-white no-underline hover:underline"
-          href="{{ site.data.info.phones.first.number | remove: ' ' | prepend: 'tel:' }}"
-        >
-          {{- site.data.info.phones.first.number -}}
-        </a>
-      </p>
+      <div>
+        <h4 class="mb-1 text-white text-sm font-semibold tracking-wider">{{ contact.title }}</h4>
+        <p class="m-0 text-white">
+          {% if contact.href %}
+            <a
+              class="text-white no-underline hover:underline"
+              href="{{ contact.href | relative_url }}"
+            >
+              {{ contact.text }}
+            </a>
+          {% else %}
+            {{ contact.text }}
+          {% endif %}
+        </p>
+      </div>
     </div>
-  </div>
-
-  <div class="flex items-center gap-4 overflow-hidden">
-    <div class="w-[70px] p-[25px] xl:w-[90px] xl:p-[35px] shrink-0 rounded-full bg-gray-650 *:fill-white">
-      {% include icons/mail.svg %}
-    </div>
-
-    <div>
-      <h4 class="mb-1 text-white text-sm font-semibold tracking-wider">E-mail</h4>
-      <p class="m-0 text-white">
-        <a
-          class="text-white no-underline hover:underline"
-          href="{{ site.data.info.emails.first | prepend: 'mailto:' }}"
-        >
-          {{- site.data.info.emails.first -}}
-        </a>
-      </p>
-    </div>
-  </div>
-
-  <div class="flex items-center gap-4 overflow-hidden">
-    <div class="w-[70px] p-[25px] xl:w-[90px] xl:p-[35px] shrink-0 rounded-full bg-gray-650 *:fill-white">
-      {% include icons/location.svg %}
-    </div>
-
-    <div>
-      <h4 class="mb-1 text-white text-sm font-semibold tracking-wider">Adres</h4>
-      <p class="m-0 text-white">
-        <a
-          class="text-white no-underline hover:underline"
-          target="_blank"
-          href="{{ site.data.info.addressHref }}"
-        >
-          {{- site.data.info.address -}}
-        </a>
-      </p>
-    </div>
-  </div>
-
-  <div class="flex items-center gap-4 overflow-hidden">
-    <div class="w-[70px] p-[25px] xl:w-[90px] xl:p-[35px] shrink-0 rounded-full bg-gray-650 *:fill-white">
-      {% include icons/clock.svg %}
-    </div>
-
-    <div>
-      <h4 class="mb-1 text-white text-sm font-semibold tracking-wider">Godziny pracy</h4>
-      <p class="m-0 text-white">{{ site.data.info.openingHours }}</p>
-    </div>
-  </div>
+  {% endfor %}
 </div>
