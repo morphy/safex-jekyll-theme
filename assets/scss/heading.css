@@ -1,32 +1,33 @@
 .heading {
-	@apply relative z-10 inline-block max-w-full px-12;
+  @apply relative z-10 inline-block max-w-full px-12;
 }
 
 .heading > :first-child {
-	height: 53px;
-	letter-spacing: 1.5px;
+  height: 53px;
+  letter-spacing: 1.5px;
+  font-size: 1.1rem;
 
-	@apply inline-flex items-center justify-center relative max-w-full px-8 mb-0 bg-gray-750 text-white text-center font-semibold;
+  @apply inline-flex items-center justify-center relative max-w-full px-8 mb-0 bg-gray-750 text-white text-center font-semibold;
 }
 
 .heading > :first-child:before {
-	content: "";
-	left: -20px;
-	border-width: 0 0 53px 20px;
+  content: "";
+  left: -20px;
+  border-width: 0 0 53px 20px;
 
-	@apply absolute border-solid z-10 border-transparent border-b-gray-750;
+  @apply absolute border-solid z-10 border-transparent border-b-gray-750;
 }
 
 .heading > :first-child:after {
-	content: "";
-	right: -20px;
-	border-width: 53px 20px 0 0;
+  content: "";
+  right: -20px;
+  border-width: 53px 20px 0 0;
 
-	@apply absolute border-solid z-10 border-transparent border-t-gray-750;
+  @apply absolute border-solid z-10 border-transparent border-t-gray-750;
 }
 
 .heading hr {
-	height: 5px;
+  height: 5px;
 
-	@apply absolute -z-10 w-full top-6 left-0 h-[5px] border-stone-400 border-1 border-l-0 border-r-0;
+  @apply absolute -z-10 w-full top-6 left-0 h-[5px] border-stone-400 border border-l-0 border-r-0;
 }
