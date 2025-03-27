@@ -1,0 +1,6 @@
+package-lock.json
+**/*.jpg
+**/*.webp
+**/*.avif
+node_modules/
+assets/lib/
