@@ -8,10 +8,10 @@
       <h1 class="pt-8 text-white text-2xl text-center font-medium">{{ page.title }}</h1>
 
       <ol class="pb-8 mt-2.5 flex flex-wrap justify-center items-center gap-2 text-white text-2xs text-center">
-        {% assign homepage = site.pages | where: 'url', site.baseurl | first %}
+        {% assign homepage = site.pages | where: 'url', '/' | first %}
 
         <li>
-          <a class="hover:underline" href="{{ homepage.url }}">{{ homepage.title }}</a>
+          <a class="hover:underline" href="{{ homepage.url | relative_url }}">{{ homepage.title }}</a>
         </li>
 
         {% if page.collection %}

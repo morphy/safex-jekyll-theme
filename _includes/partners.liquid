@@ -5,10 +5,10 @@
   {% assign class = 'basis-1/2 sm:basis-1/3 md:basis-1/4 xl:basis-1/5' %}
 {% endif %}
 
-<div class="flex flex-wrap border-t-1 border-l-1 border-solid border-gray-200">
+<div class="flex flex-wrap border-t border-l border-solid border-gray-200">
   {% for partner in site.data.partners limit: limit %}
     <div
-      class="{{ class }} p-6 flex items-center justify-center border-b-1 border-r-1 border-solid border-gray-200"
+      class="{{ class }} p-6 flex items-center justify-center border-b border-r border-solid border-gray-200"
     >
       <a href="{{ partner.href }}">
         <img
