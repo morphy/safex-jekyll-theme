@@ -1,13 +1,13 @@
 <section class="container pt-16 pb-24">
-  <div class="text-center mb-12">
-    <div class="heading mb-12">
+  <div class="text-center">
+    <div class="heading">
       <h1>{{ page.categoriesTitle }}</h1>
       <hr>
     </div>
+  </div>
 
-    <p class="lg:w-4/5 mx-auto">
-      {{ page.categoriesDesc | markdownify | remove: '<p>' | remove: '</p>' }}
-    </p>
+  <div class="lg:w-4/5 mx-auto text-center my-12">
+    {{ page.categoriesDesc | markdownify }}
   </div>
 
   {% assign documents = site.emptyArray %}
@@ -18,7 +18,7 @@
 
   {% assign directoryNodes = documents | where_exp: 'item', 'page.categoriesFilter contains item.path' %}
 
-  {% include directories.liquid %}
+  {% include directories.liquid nodes=directoryNodes %}
 
   <div class="text-center mt-16">
     <div class="button">
