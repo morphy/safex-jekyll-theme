@@ -1,40 +1,71 @@
-<nav class="bg-gray-750">
-  <ul class="container flex flex-wrap text-white justify-evenly md:justify-start">
-    {% assign menuPages = site.pages %}
+<div class="container flex items-center justify-between gap-x-14 gap-y-10 flex-wrap py-8">
+  <div class="shrink-0 order-1 flex items-center justify-between lg:justify-center basis-full md:basis-auto lg:basis-full xl:basis-auto">
+    <a href="{{ "/" | relative_url }}" rel="home">
+      <img
+        src="{{ site.data.info.headerLogo | relative_url }}"
+        alt="{{ site.data.info.headerLogoAlt }}"
+        class="h-12 lg:h-14"
+      >
+    </a>
 
-    {% for collection in site.collections %}
-      {% if collection.label == 'posts' %}
-        {% continue %}
-      {% endif %}
+    <label
+      class="cursor-pointer block md:hidden px-4 py-7 border border-solid border-gray-500"
+      for="menuInput"
+      id="menuButton"
+    >
+      <span></span>
+    </label>
+  </div>
 
-      {% assign path = collection.label | prepend: '_' | append: '/index.md' %}
-      {% assign collectionPage = collection.docs | where: 'path', path | first %}
+  <nav class="basis-full lg:basis-auto order-3 lg:order-2" id="menu">
+    <input id="menuInput" type="checkbox" class="hidden">
 
-      {% assign menuPages = menuPages | push: collectionPage %}
-    {% endfor %}
+    <ul class="flex md:flex-row flex-col gap-8">
+      {% assign menuPages = site.pages %}
 
-    {% assign menuPages = menuPages | sort: 'order' %}
-
-    {% for menuPage in menuPages %}
-      {% unless menuPage.hideInNav %}
-        {% assign url = menuPage.url | relative_url %}
-        {% assign title = menuPage.title %}
-
-        {% assign classes = 'duration-75 hover:bg-red-500' %}
-
-        {% assign currentPath = page.path | remove: 'index.md' %}
-        {% assign documentPath = menuPage.path | remove: 'index.md' %}
-
-        {% if menuPage.path == page.path or (currentPath contains documentPath and page.collection) %}
-          {% assign classes = classes | append: ' bg-red-500' %}
+      {% for collection in site.collections %}
+        {% if collection.label == 'posts' %}
+          {% continue %}
         {% endif %}
 
-        <li class="{{ classes }}">
-          <a class="block p-5 text-2xs uppercase" href="{{ url | remove: 'index.html'}}">
-            {{ title }}
-          </a>
-        </li>
-      {% endunless %}
-    {% endfor %}
-  </ul>
-</nav>
+        {% assign path = collection.label | prepend: '_' | append: '/index.md' %}
+        {% assign collectionPage = collection.docs | where: 'path', path | first %}
+
+        {% assign menuPages = menuPages | push: collectionPage %}
+      {% endfor %}
+
+      {% assign menuPages = menuPages | sort: 'order' %}
+
+      {% for menuPage in menuPages %}
+        {% unless menuPage.hideInNav %}
+          {% assign url = menuPage.url | relative_url %}
+          {% assign title = menuPage.title %}
+
+          {% assign liClasses = 'duration-150 hover:text-red-500 tracking-wide' %}
+          {% assign aClasses = '' %}
+
+          {% assign currentPath = page.path | remove: 'index.md' %}
+          {% assign documentPath = menuPage.path | remove: 'index.md' %}
+
+          {% if menuPage.path == page.path or (currentPath contains documentPath and page.collection) %}
+            {% assign aClasses = aClasses | append: ' text-red-500' %}
+          {% endif %}
+
+          <li class="{{ liClasses }}">
+            <a class="{{ aClasses }}" href="{{ url | remove: 'index.html'}}">
+              {{ title }}
+            </a>
+          </li>
+        {% endunless %}
+      {% endfor %}
+    </ul>
+  </nav>
+
+  <label class="grow max-w-80 order-2 lg:order-3 hidden md:block">
+    <input
+      type="text"
+      class="w-full border border-solid border-gray-400 px-6 py-3 text-sm"
+      placeholder="Wyszukaj"
+    >
+  </label>
+</div>
