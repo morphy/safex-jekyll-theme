@@ -2,7 +2,7 @@
   font-family: "Poppins";
   src:
     local("Open Sans"),
-    url("/assets/fonts/poppins/poppins-thin.woff2") format("woff2");
+    url("../fonts/poppins/poppins-thin.woff2") format("woff2");
   font-weight: 100;
   font-style: normal;
   font-display: swap;
@@ -12,7 +12,7 @@
   font-family: "Poppins";
   src:
     local("Open Sans"),
-    url("/assets/fonts/poppins/poppins-extra-light.woff2") format("woff2");
+    url("../fonts/poppins/poppins-extra-light.woff2") format("woff2");
   font-weight: 200;
   font-style: normal;
   font-display: swap;
@@ -22,7 +22,7 @@
   font-family: "Poppins";
   src:
     local("Open Sans"),
-    url("/assets/fonts/poppins/poppins-light.woff2") format("woff2");
+    url("../fonts/poppins/poppins-light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -32,7 +32,7 @@
   font-family: "Poppins";
   src:
     local("Open Sans"),
-    url("/assets/fonts/poppins/poppins-regular.woff2") format("woff2");
+    url("../fonts/poppins/poppins-regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -42,7 +42,7 @@
   font-family: "Poppins";
   src:
     local("Open Sans"),
-    url("/assets/fonts/poppins/poppins-medium.woff2") format("woff2");
+    url("../fonts/poppins/poppins-medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -52,7 +52,7 @@
   font-family: "Poppins";
   src:
     local("Open Sans"),
-    url("/assets/fonts/poppins/poppins-semi-bold.woff2") format("woff2");
+    url("../fonts/poppins/poppins-semi-bold.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -62,7 +62,7 @@
   font-family: "Poppins";
   src:
     local("Open Sans"),
-    url("/assets/fonts/poppins/poppins-bold.woff2") format("woff2");
+    url("../fonts/poppins/poppins-bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -72,7 +72,7 @@
   font-family: "Poppins";
   src:
     local("Open Sans"),
-    url("/assets/fonts/poppins/poppins-extra-bold.woff2") format("woff2");
+    url("../fonts/poppins/poppins-extra-bold.woff2") format("woff2");
   font-weight: 800;
   font-style: normal;
   font-display: swap;
@@ -82,7 +82,7 @@
   font-family: "Poppins";
   src:
     local("Open Sans"),
-    url("/assets/fonts/poppins/poppins-black.woff2") format("woff2");
+    url("../fonts/poppins/poppins-black.woff2") format("woff2");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
