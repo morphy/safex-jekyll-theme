@@ -1,44 +1,40 @@
-<div class="container flex items-center justify-between gap-6 py-8 flex-col lg:flex-row">
-  <a href="{{ "/" | relative_url }}" rel="home" class="block">
-    <img
-      src="{{ site.data.info.logo | relative_url }}"
-      alt="Safex"
-      class="w-[150px]"
-    >
-  </a>
+<div class="bg-red-500">
+  <div class="container flex items-center justify-center lg:justify-between py-4 flex-row text-white text-xs">
+    <div class="flex flex-wrap items-center justify-center gap-8">
+      {% for contact in site.data.info.headerContacts %}
+        {% assign classes = 'items-center gap-2' %}
 
-  <div class="w-full flex items-start justify-between gap-4 flex-col lg:w-auto sm:items-center sm:gap-6 sm:flex-row">
-    <div class="flex items-center gap-3">
-      <div class="p-[14px] w-12 border-1 border-red-500 border-solid *:fill-red-500">
-        {% include icons/phone.svg %}
-      </div>
+        {% if forloop.last or forloop.first %}
+          {% assign classes = classes | append: ' flex' %}
+        {% else %}
+          {% assign classes = classes | append: ' hidden md:flex' %}
+        {% endif %}
 
-      <div class="text-2xs">
-        <h6 class="mb-1 text-zinc-500">Telefon</h6>
-        <p class="text-zinc-700 m-0">{{ site.data.info.phones.first.number }}</p>
-      </div>
+        <div class="{{ classes }}">
+          <div class="*:fill-white *:w-4">
+            {% assign iconPath = 'icons/' | append: contact.icon | append: '.svg' %}
+            {% include {{ iconPath }} %}
+          </div>
+
+          <a
+            class="hover:underline"
+            href="{{ contact.href | relative_url }}"
+          >
+            {{ contact.text }}
+          </a>
+        </div>
+      {% endfor %}
     </div>
 
-    <div class="flex items-center gap-3">
-      <div class="p-[12px] w-12 border-1 border-red-500 border-solid *:fill-red-500">
-        {% include icons/whatsapp.svg %}
-      </div>
-
-      <div class="text-2xs">
-        <h6 class="mb-1 text-zinc-500">WhatsApp</h6>
-        <p class="text-zinc-700 m-0">{{ site.data.info.whatsapp }}</p>
-      </div>
-    </div>
-
-    <div class="flex items-center gap-3">
-      <div class="p-[15px] w-12 border-1 border-red-500 border-solid *:fill-red-500">
-        {% include icons/location.svg %}
-      </div>
-
-      <div class="text-2xs">
-        <h6 class="mb-1 text-zinc-500">Adres</h6>
-        <p class="text-zinc-700 m-0">{{ site.data.info.address }}</p>
-      </div>
+    <div class="hidden lg:flex items-center gap-8">
+      {% for link in site.data.info.headerLinks %}
+        <a
+          class="hover:underline"
+          href="{{ link.href | relative_url }}"
+        >
+          {{ link.text }}
+        </a>
+      {% endfor %}
     </div>
   </div>
 </div>

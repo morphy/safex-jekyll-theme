@@ -1,32 +1,11 @@
-{% assign galleryOnlyInLeafNodes = page.galleryOnlyInLeafNodes | default: true %}
+{% include directories.liquid nodes=directoryNodes %}
 
-{% assign imageDirectory = page.path | split: '/' | pop | join: '/' %}
-{% assign files = site.emptyArray %}
+{% include files.liquid nodes=fileNodes %}
 
-{% directory path: imageDirectory exclude: .md$ %}
-{% if file.name contains '.' %}
-  {% assign cleanFilename = file.url | remove_first: '_' | split: '.' | pop | join: '.' %}
-
-  {% assign files = files | push: cleanFilename %}
-{% endif %}
-{% enddirectory %}
-
-<section class="container flex flex-col gap-12 pt-16 pb-24">
+<div>
   {% if page.subtitle %}
-    <div class="text-center lg:w-4/5 mx-auto">
-      {% include subtitle.liquid %}
-    </div>
+    <h1 class="text-[2em] mb-6">{{ page.subtitle }}</h1>
   {% endif %}
 
-  <div class="lg:w-4/5 mx-auto">
-    {% include content.liquid %}
-  </div>
-
-  {% unless galleryOnlyInLeafNodes %}
-    {% include gallery.liquid files=files %}
-  {% endunless %}
-
-  {% include directories.liquid %}
-
-  {% include files.liquid %}
-</section>
+  <div class="content">{{ content }}</div>
+</div>

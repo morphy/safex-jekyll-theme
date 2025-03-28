@@ -14,5 +14,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "jekyll", "~> 4.3"
   spec.add_runtime_dependency "jekyll-seo-tag", "~> 2.8"
-  spec.add_runtime_dependency "jekyll-image-size", "~> 1.2"
+  spec.add_runtime_dependency "jekyll_picture_tag", "~> 2.0"
+  spec.add_runtime_dependency "jekyll-last-modified-at", "~> 1.3"
+  spec.add_runtime_dependency "jekyll-minifier", "~> 0.1"
 end

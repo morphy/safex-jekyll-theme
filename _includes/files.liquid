@@ -1,81 +1,46 @@
-{% assign hideItselfInFileList = page.hideItselfInFileList | default: true %}
+{% assign nodes = include.nodes | default: site.emptyArray %}
 
-{% if hideItselfInFileList %}
-  {% assign lowestNumberOfFiles = 1 %}
-{% else %}
-  {% assign lowestNumberOfFiles = 0 %}
-{% endif %}
-
-{% unless fileNodes.size <= lowestNumberOfFiles %}
+{% unless nodes.size == 0 %}
   <div class="flex flex-col gap-10">
-    {% assign fileNodes = fileNodes | sort: 'order' %}
+    {% assign nodes = nodes | sort: 'order' %}
 
-    {% for node in fileNodes %}
+    {% for node in nodes %}
       {% assign isItself = false %}
 
       {% if node.path == page.path %}
         {% assign isItself = true %}
       {% endif %}
 
-      {% unless isItself and hideItselfInFileList %}
+      {% unless isItself %}
         {% if node.overrides.url %}
           {% assign url = node.overrides.url | relative_url %}
         {% else %}
           {% assign url = node.url | remove: 'index.html' | relative_url %}
         {% endif %}
 
-        <article class="flex flex-col md:flex-row">
-          <div class="w-full md:w-72 lg:w-96 h-64 md:h-auto">
+        {% include node-images.liquid %}
+
+        <article class="flex flex-col lg:flex-row">
+          <div class="lg:w-72 lg:h-auto h-48">
             <a href="{{ url }}">
-              {% assign name = node.path | split: '/' | pop | last | append: '-1' %}
-
-              {% assign image = node.url
-                | remove_first: '_'
-                | split: '/'
-                | pop
-                | join: '/'
-                | append: '/'
-                | append: name
-              %}
-
-              {% include image.liquid src=image %}
+              <img src="{{ imageFiles.first }}" alt="" class="size-full object-cover">
             </a>
           </div>
 
-          <div class="flex-1 flex flex-col border-solid border-1 border-gray-300 border-t-[3px] border-t-red-500">
-            <div class="flex">
-              <div class="basis-full flex items-center px-6 py-2.5 border-b-[1px] border-gray-300 border-solid">
-                <div class="px-2 py-[7.5px] w-7 rounded-full border-1 border-gray-300 border-solid *:fill-gray-400">
-                  {% include icons/tag.svg %}
-                </div>
-
-                <span class="text-[12px] ml-2.5 text-neutral-500">
-                  Tagi:
-
-                  {% comment %}<?php if ($tags): foreach ($tags as $tag): ?>{% endcomment %}
-                  {% comment %}<a href="<?= get_tag_link($tag) ?>"><?= $tag->name ?></a>{% endcomment %}
-                  {% comment %}<?php endforeach; endif; ?>{% endcomment %}
-                </span>
-              </div>
-
-              <div class="bg-red-500 px-2.5 pt-[3px] text-center text-white text-xs">
-                {% comment %}<?= get_the_date("d") ?>{% endcomment %}
-                {% comment %}<br>{% endcomment %}
-                {% comment %}<?= get_the_date("M") ?>{% endcomment %}
-              </div>
-            </div>
+          <div class="flex-1 flex flex-col border-solid border border-t-[3px] border-gray-300 border-t-red-500">
+            {% include node-metadata.liquid imageFiles=imageFiles %}
 
             <div class="flex-1 flex flex-col p-6">
-              <a href="{{ url }}">
+              <a class="mb-2.5" href="{{ url }}">
                 <h3
-                  class="mb-2.5 uppercase font-semibold tracking-widest duration-200 hover:text-red-500"
+                  class="uppercase font-semibold tracking-widest duration-200 text-lg hover:text-red-500"
                 >
                   {{ node.title }}
                 </h3>
               </a>
 
               <div class="flex-1 content">
-                {{ node.content | truncatewords: site.data.info.excerptLength }}
+                {{ node.excerpt }}
               </div>
 
               <div class="mt-5">

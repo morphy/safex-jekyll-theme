@@ -1,0 +1,23 @@
+media_queries:
+  xs: "max-width: 575px"
+  sm: "max-width: 767px"
+  md: "max-width: 991px"
+  lg: "max-width: 1199px"
+  xl: "max-width: 1399px"
+  xxl: "min-width: 1400px"
+
+presets:
+  dupa:
+    formats: [webp, original]
+    widths: [100, 200, 300, 400, 500, 600, 700]
+    fallback_width: 200
+    #    crop: "1:1"
+    #base_width: 250
+    #pixel_ratios: [1]
+    #size: "150px"
+    sizes:
+      sm: "100px"
+      md: "200px"
+      lg: "300px"
+      xl: "400px"
+      xxl: "500px"

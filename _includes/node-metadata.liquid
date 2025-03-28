@@ -1,0 +1,45 @@
+{% assign imageFiles = include.imageFiles | default: site.emptyArray %}
+
+{% assign imagesCount = imageFiles.size %}
+
+{% if imagesCount == 0 %}
+  {% assign imagesNoun = 'zdjęć' %}
+{% elsif imagesCount == 1 %}
+  {% assign imagesNoun = 'zdjęcie' %}
+{% elsif imagesCount >= 2 and imagesCount <= 4 %}
+  {% assign imagesNoun = 'zdjęcia' %}
+{% else %}
+  {% assign imagesNoun = 'zdjęć' %}
+{% endif %}
+
+<div class="flex flex-row items-center xl:gap-8 sm:gap-4 gap-4 px-6 py-2.5 border-b border-gray-300">
+  <div class="flex items-center gap-2">
+    <div class="shrink-0 p-1.5 size-7 rounded-full border border-gray-300 border-solid *:fill-gray-400">
+      {% include icons/image.svg %}
+    </div>
+
+    <span class="text-[12px]  text-neutral-500">{{ imagesCount }}&nbsp;{{ imagesNoun }}</span>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <div class="shrink-0 p-1.5 size-7 rounded-full border border-gray-300 border-solid *:fill-gray-400">
+      {% include icons/clock-regular.svg %}
+    </div>
+
+    <span class="text-[12px]  text-neutral-500">
+      <span class="hidden md:inline">Czas realizacji:</span>
+      {{ node.time | default: 'Tysiąc lat' }}
+    </span>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <div class="shrink-0 p-1.5 size-7 rounded-full border border-gray-300 border-solid *:fill-gray-400">
+      {% include icons/pen-to-square.svg %}
+    </div>
+
+    <span class="text-[12px]  text-neutral-500">
+      <span class="hidden md:inline">Opublikowano:</span>
+      {{ node.last_modified_at | date: '%d.%m.%Y' }}
+    </span>
+  </div>
+</div>

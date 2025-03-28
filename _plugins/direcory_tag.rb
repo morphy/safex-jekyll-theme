@@ -1,3 +1,6 @@
+# This is a slightly modified version of the original plugin
+# Check out the original at https://github.com/sillylogger/jekyll-directory
+
 # Title: Dynamic directories for Jekyll
 # Author: Tommy Sullivan http://superawesometommy.com, Robert Park http://exolucere.ca
 # Description: The directory tag lets you iterate over files at a particular path. If files conform to the standard Jekyll format, YYYY-MM-DD-file-title, then those attributes will be populated on the yielded file object. The `forloop` object maintains [its usual context](http://wiki.shopify.com/UsingLiquid#For_loops).
@@ -33,6 +36,16 @@ module Jekyll
 
     STANDARD_POST_FILENAME_MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
 
+    def to_filesize(size)
+        {
+          'B'  => 1024,
+          'KB' => 1024 * 1024,
+          'MB' => 1024 * 1024 * 1024,
+          'GB' => 1024 * 1024 * 1024 * 1024,
+          'TB' => 1024 * 1024 * 1024 * 1024 * 1024
+        }.each_pair { |e, s| return "#{(size.to_f / (s / 1024)).round(1)} #{e}" if size < s }
+    end
+
     def initialize(tag_name, markup, parse_context)
       super
 
@@ -42,7 +55,7 @@ module Jekyll
         @attributes[key] = value
       end
 
-      @exclude = Regexp.new(@attributes['exclude'] || '.html$', Regexp::EXTENDED | Regexp::IGNORECASE)
+      @filter = Regexp.new(@attributes['filter'] || '.txt$', Regexp::EXTENDED | Regexp::IGNORECASE)
       @reverse = @attributes['reverse'].nil?
     end
 
@@ -60,7 +73,7 @@ module Jekyll
       end
 
       directory_files = File.join(listed_dir, "*")
-      files = Dir.glob(directory_files).reject{|f| f =~ @exclude }
+      files = Dir.glob(directory_files).select{|f| f =~ @filter }
       files.sort! {|x,y| @reverse ? x <=> y : y <=> x }
 
       length = files.length
@@ -69,6 +82,7 @@ module Jekyll
       context.stack do
         files.each_with_index do |filename, index|
           basename = File.basename(filename)
+          size = File.size(filename)
 
           url = filename.dup
           url.slice!(source_dir)
@@ -89,7 +103,8 @@ module Jekyll
             'date' => date,
             'name' => basename,
             'slug' => slug,
-            'url' => url
+            'url' => url,
+            'filesize' => self.to_filesize(size)
           }
 
           context['forloop'] = {

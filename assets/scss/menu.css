@@ -1,0 +1,56 @@
+#menuButton span {
+  &,
+  &::before,
+  &::after {
+    @apply bg-gray-500 h-[2px] duration-200 block w-8;
+  }
+
+  & {
+    @apply relative;
+  }
+
+  &::before,
+  &::after {
+    @apply absolute;
+    content: "";
+  }
+
+  &::before {
+    top: -7px;
+  }
+
+  &::after {
+    bottom: -7px;
+  }
+}
+
+div:has(#menuInput:checked) #menuButton {
+  span::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  span {
+    background-color: transparent;
+  }
+
+  span::after {
+    bottom: -1px;
+    transform: rotate(-45deg);
+  }
+}
+
+#menu:has(#menuInput) {
+  display: none;
+}
+
+#menu:has(#menuInput:checked) {
+  display: block;
+}
+
+@media screen(md) {
+  #menu:has(#menuInput),
+  #menu:has(#menuInput:checked) {
+    display: block;
+  }
+}

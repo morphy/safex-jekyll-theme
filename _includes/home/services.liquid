@@ -5,9 +5,9 @@
       <hr>
     </div>
 
-    <p class="lg:w-4/5 mx-auto">
-      {{ page.servicesDesc | markdownify | remove: '<p>' | remove: '</p>' }}
-    </p>
+    <div class="lg:w-4/5 mx-auto">
+      {{ page.servicesDesc | markdownify }}
+    </div>
   </div>
 
   <div class="flex flex-wrap bg-white">
@@ -34,11 +34,16 @@
           | join: '/'
           | append: '/'
           | append: name
+          | append: '.jpg'
         %}
 
-        {% include image.liquid src=image class='w-full h-80 object-cover' loading='lazy' %}
+        <img
+          class="w-full h-80 object-cover"
+          loading="lazy"
+          src="{{ image }}"
+        >
 
-        <div class="flex-1 flex items-center justify-center p-6 border-gray-200 border-solid border-b-1 border-r-1">
+        <div class="flex-1 flex items-center justify-center p-6 border-gray-200 border-solid border-b border-r">
           <h5 class="text-center text-xs text-black hover:text-red-500 duration-200">{{ document.title }}</h5>
         </div>
       </a>

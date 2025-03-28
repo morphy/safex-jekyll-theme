@@ -3,15 +3,7 @@
   {% include head.liquid %}
 
   <body>
-    {% include header/index.liquid %}
-
-    <main>
-      {% unless page.layout == 'home' %}
-        {% include hero.liquid %}
-      {% endunless %}
-
-      {{ content }}
-    </main>
+    {{ content }}
 
     {% include footer/index.liquid %}
   </body>

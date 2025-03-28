@@ -1,21 +1,23 @@
-<section class="relative">
-  {% include image.liquid src='assets/images/bg/bg1' class='absolute inset-0 -z-10 size-full object-cover' %}
-
-  <div class="bg-black/60">
-    <div class="container py-28 md:py-32 xl:py-52 lg:pr-80">
-      <h2 class="text-center md:text-left text-white text-base sm:text-[22px] xl:text-xl">
+<section class="grow flex flex-col border-t border-solid border-gray-400">
+  <div class="container grow flex flex-col md:flex-row items-center gap-16 py-16">
+    <div class="text-center md:text-left">
+      <h4 class="lg:text-lg">
         {{ page.heroTop }}
-      </h2>
+      </h4>
 
       <h1
-        class="text-center md:text-left text-white text-[30px] sm:text-[36px] md:text-[40px] lg:text-[45px] xl:text-[50px] font-medium leading-[1.15] my-8 sm:my-4"
+        class="text-[30px] sm:text-[36px] md:text-[40px] lg:text-[45px] xl:text-[50px] font-medium leading-[1.15] my-8 sm:my-4"
       >
         {{ page.hero }}
       </h1>
 
-      <p class="text-center md:text-left text-white text-sm">
+      <p class="text-sm lg:text-base">
         {{ page.heroBottom }}
       </p>
+    </div>
+
+    <div class="shrink-0 basis-auto md:basis-6/12 xxl:basis-5/12">
+      <img class="w-full" src="{{ page.heroImage }}" alt="{{ page.heroImageAlt }}">
     </div>
   </div>
 </section>

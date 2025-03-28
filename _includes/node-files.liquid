@@ -1,0 +1,24 @@
+{% assign directory = node.path | split: '/' | pop | join: '/' %}
+{% assign files = site.emptyArray %}
+
+<h2 class="text-lg lg:text-xl tracking-wider">Do pobrania</h2>
+<hr class="mb-5 mt-3 w-16 h-0.5 bg-red-500 border-none">
+
+<ul>
+  {% directory path: directory filter: .$ %}
+
+  {% assign cleanFilename = file.url | remove_first: '_' %}
+
+  <li>
+    <a
+      class="flex py-4 text-2xs text-neutral-600 border-b border-gray-300 border-solid duration-200 hover:underline hover:text-red-500"
+      href="{{ file.url | remove_first: '_' | relative_url }}"
+      target="_blank"
+    >
+      {{ file.name }}
+
+      <span class="ml-auto">{{ file.filesize }}</span>
+    </a>
+  </li>
+  {% enddirectory %}
+</ul>

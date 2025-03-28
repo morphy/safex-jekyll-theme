@@ -1,29 +1,33 @@
-{% unless directoryNodes.size == 0 %}
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-    {% assign directoryNodes = directoryNodes | sort: 'order' %}
+{% assign nodes = include.nodes | default: site.emptyArray %}
 
-    {% for node in directoryNodes %}
+{% unless nodes.size == 0 %}
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+    {% assign nodes = nodes | sort: 'order' %}
+
+    {% for node in nodes %}
       {% if node.overrides.url %}
         {% assign url = node.overrides.url | relative_url %}
       {% else %}
         {% assign url = node.url | remove: 'index.html' | relative_url %}
       {% endif %}
 
-      <article class="flex flex-col">
+      {% assign name = node.path | split: '/' | pop | last %}
+
+      {% assign image = node.url
+        | remove_first: '_'
+        | split: '/'
+        | pop
+        | join: '/'
+        | append: '/'
+        | append: name
+        | append: '.jpg'
+        | relative_url
+      %}
+
+      <article class="flex flex-col border-solid border border-gray-300">
         <a href="{{ url }}">
-          <div class="h-52">
-            {% assign name = node.path | split: '/' | pop | last %}
-
-            {% assign image = node.url
-              | remove_first: '_'
-              | split: '/'
-              | pop
-              | join: '/'
-              | append: '/'
-              | append: name
-            %}
-
-            {% include image.liquid src=image %}
+          <div class="h-48">
+            <img src="{{ image }}" alt="" class="size-full object-cover">
           </div>
 
           <h2 class="p-4 text-center text-white font-semibold tracking-wide duration-200 bg-red-500 hover:bg-gray-750">
@@ -31,8 +35,8 @@
           </h2>
         </a>
 
-        <div class="flex flex-col flex-1 bg-neutral-100 border-solid border-1 border-gray-200">
-          <div class="flex-1 p-6 mb-10 text-zinc-500">
+        <div class="flex flex-col grow bg-neutral-100">
+          <div class="grow p-6 text-zinc-500">
             {{ node.content | truncatewords: 20 }}
           </div>
 

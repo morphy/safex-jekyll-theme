@@ -1,10 +1,18 @@
 ---
 layout: default
 ---
-{% include home/hero.liquid %}
+<div class="flex flex-col min-h-screen">
+  {% include header/index.liquid %}
 
-{% include home/categories.liquid %}
+  {% include home/hero.liquid %}
 
-{% include home/services.liquid %}
+  {% include home/hero-services.liquid %}
+</div>
 
-{% include home/partners-and-opinions.liquid %}
+<main>
+  {% include home/categories.liquid %}
+
+  {% include home/services.liquid %}
+
+  {% include home/partners-and-opinions.liquid %}
+</main>

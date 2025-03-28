@@ -1,0 +1,14 @@
+---
+layout: default
+---
+<header>
+  {% include header/index.liquid %}
+</header>
+
+<main>
+  {% include page-hero.liquid %}
+
+  <section class="container flex flex-col gap-12 pt-24 pb-24">
+    {{ content }}
+  </section>
+</main>

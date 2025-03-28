@@ -1,0 +1,8 @@
+{% assign imageDirectory = node.path | split: '/' | pop | join: '/' %}
+{% assign imageFiles = site.emptyArray %}
+
+{% directory path: imageDirectory filter: .jpg$ %}
+{% assign cleanFilename = file.url | remove_first: '_' %}
+
+{% assign imageFiles = imageFiles | push: cleanFilename %}
+{% enddirectory %}
